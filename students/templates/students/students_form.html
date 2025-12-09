@@ -1,11 +1,49 @@
-<h2>{{ student.id|default:"Add Student" }}</h2>
+{% load static %}
 
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="name" value="{{ student.name|default:'' }}" placeholder="Name"><br><br>
-    <input type="email" name="email" value="{{ student.email|default:'' }}" placeholder="Email"><br><br>
-    <input type="number" name="age" value="{{ student.age|default:'' }}" placeholder="Age"><br><br>
-    <input type="text" name="course" value="{{ student.course|default:'' }}" placeholder="Course"><br><br>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ student.id|default:"Add Student" }}</title>
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
 
-    <button type="submit">Save</button>
-</form>
+<div class="container">
+    <h2>{{ student.id|default:"Add Student" }}</h2>
+    
+    {% if error %}
+    <p style="color:red; font-weight:bold;">{{ error }}</p>
+    {% endif %}
+
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        
+        <label>PRN Number</label>
+        <input type="text" name="prn" value="{{ student.prn|default:'' }}" required>
+
+
+        <label>Name</label>
+        <input type="text" name="name" value="{{ student.name|default:'' }}" required>
+
+        <label>Email</label>
+        <input type="email" name="email" value="{{ student.email|default:'' }}" required>
+
+        <label>Age</label>
+        <input type="number" name="age" value="{{ student.age|default:'' }}" required>
+
+        <label>Course</label>
+        <input type="text" name="course" value="{{ student.course|default:'' }}" required>
+
+        <label>Percentage</label>
+        <input type="number" step="0.01" name="percentage" value="{{ student.percentage|default:'' }}" required>
+
+
+        <button class="btn btn-save" type="submit">Save</button>
+        <a href="/" class="btn btn-cancel">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>
