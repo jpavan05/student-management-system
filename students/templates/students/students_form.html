@@ -1,0 +1,11 @@
+<h2>{{ student.id|default:"Add Student" }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" value="{{ student.name|default:'' }}" placeholder="Name"><br><br>
+    <input type="email" name="email" value="{{ student.email|default:'' }}" placeholder="Email"><br><br>
+    <input type="number" name="age" value="{{ student.age|default:'' }}" placeholder="Age"><br><br>
+    <input type="text" name="course" value="{{ student.course|default:'' }}" placeholder="Course"><br><br>
+
+    <button type="submit">Save</button>
+</form>
